@@ -27,9 +27,13 @@ pub fn again(message: &str, op1: &str, op2: &str) -> bool {
 pub fn banner(message: &str) {
     const LENGTH: usize = 60;
     let nspaces = (LENGTH - message.trim().chars().count()) / 2;
-    println!("\n{}\n{}{}{}\n{}\n",
-        "-".repeat(LENGTH), " ".repeat(nspaces), message, 
-        " ".repeat(nspaces), "-".repeat(LENGTH) 
+    println!(
+        "\n{}\n{}{}{}\n{}\n",
+        "-".repeat(LENGTH),
+        " ".repeat(nspaces),
+        message,
+        " ".repeat(nspaces),
+        "-".repeat(LENGTH)
     );
 }
 
@@ -153,7 +157,7 @@ pub fn input_u64() -> u64 {
 
 /*
  * This function implements input of an 32-bits non-signed
- * floating-point number. Case the value is non-numeric the 
+ * floating-point number. Case the value is non-numeric the
  * return is 0.
  */
 pub fn input_f32() -> f32 {
@@ -172,7 +176,7 @@ pub fn input_f32() -> f32 {
 
 /*
  * This function implements input of an 64-bits non-signed
- * floating-point number. Case the value is non-numeric the 
+ * floating-point number. Case the value is non-numeric the
  * return is 0.
  */
 pub fn input_f64() -> f64 {
