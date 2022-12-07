@@ -1,17 +1,16 @@
 use std::io;
 use std::io::prelude::*;
 
-////////////////////// ROTINAS ÚTEIS //////////////////////
+//////////////////////// UTILITIES ////////////////////////
 /*
- * Essa função mostra a mensagem na tela e captura uma das
- * opções passadas.
- * Exemplo:
- * mensagem: "Quer continuar?[s/n]"
- *     opção1: "sim"
- *     opção2: "não"
- * A função espera o usuário digitar uma dessas (não aceita
- * outra) e devolve true para  a  primeira  e  false para a
- * segunda.
+ * This function shows a message in the screen and catches
+ * an user option.
+ * Example:
+ * mesage: "Continue?[yes/no]"
+ *     op1: "yes"
+ *     op2: "no"
+ * The function wait user type one of this options (and never
+ * other option) and returns true for op1 and false for op2.
  */
 pub fn again(message: &str, op1: &str, op2: &str) -> bool {
     let mut choice: String = String::from("_");
@@ -23,34 +22,21 @@ pub fn again(message: &str, op1: &str, op2: &str) -> bool {
 }
 
 /*
- * Essa função implementa uma composição de caracteres formando uma linha.
- * ch é o caractere, t é o número de vezes que o caractere é repetido para
- * compor o objeto retornado.
- * OBS: função privada usada em banner().
- */
-fn repeat(ch: char, t: usize) -> String {
-    let mut repeated = String::new();
-    for _ in 0..t {
-        repeated.push(ch);
-    }
-    repeated
-}
-
-/*
- * Essa função implementa um banner com 69 caracteres de largura.
+ * This function implements a banner with width of 60 characters.
  */
 pub fn banner(message: &str) {
-    const LENGTH: usize = 50;
-    let line = repeat('-', LENGTH);
-    let spaces = repeat(' ', (LENGTH - message.len()) / 2);
-    println!("\n{line}\n{spaces}{message}{spaces}\n{line}\n");
+    const LENGTH: usize = 60;
+    let nspaces = (LENGTH - message.trim().chars().count()) / 2;
+    println!("\n{}\n{}{}{}\n{}\n",
+        "-".repeat(LENGTH), " ".repeat(nspaces), message, 
+        " ".repeat(nspaces), "-".repeat(LENGTH) 
+    );
 }
 
 /*
-* Essa função implementa uma pausa para o final da
-* execução do programa sequencial (ou outras situa-
-* ções onde o conteúdo da tela precise ser lido).
-*/
+ * This function implements a pause waiting the user
+ * type <ENTER> (for example).
+ */
 pub fn pause() {
     println!();
     println!("Tecle <ENTER> para encerrar...");
@@ -59,22 +45,22 @@ pub fn pause() {
 }
 
 /*
- * Essa função implementa a limpeza da tela.
+ * This function implements a clear for the screen.
  */
 pub fn clear() {
     print!("{}[2J", 27 as char);
 }
 
 /*
- * Essa função verifica se o valor é par.
+ * Boolean function returns if the number is even.
  */
 pub fn is_even(x: u32) -> bool {
     x % 2 == 0
 }
 
-///////////////// ROTINAS DE ENTRADA/SAÍDA ////////////////
+////////////////////// I/O UTILITIES //////////////////////
 /*
-* Essa função implementa a entrada de uma string.
+* This function implements string input.
 */
 pub fn input() -> String {
     // entrada
@@ -82,7 +68,7 @@ pub fn input() -> String {
     io::stdout().flush().unwrap();
     io::stdin().read_line(&mut s).unwrap();
 
-    // retira <ENTER> da string
+    // retira <ENTER> da string (no Windows ou Linux)
     if let Some('\n') = s.chars().next_back() {
         s.pop();
     }
@@ -94,9 +80,8 @@ pub fn input() -> String {
 }
 
 /*
- * Essa função implementa a entrada de valor inteiro de 32
- * bits. Se o valor digitado for não-numérico por exemplo,
- * o retorno é sempre 0.
+ * This function implements input of an 32-bits integer
+ * Case the value is non-numeric the return is 0.
  */
 pub fn input_i32() -> i32 {
     // entrada
@@ -113,9 +98,8 @@ pub fn input_i32() -> i32 {
 }
 
 /*
- * Essa função implementa a entrada de valor inteiro de 64
- * bits. Se o valor digitado for não-numérico por exemplo,
- * o retorno é sempre 0.
+ * This function implements input of an 64-bits integer
+ * Case the value is non-numeric the return is 0.
  */
 pub fn input_i64() -> i64 {
     // entrada
@@ -132,9 +116,8 @@ pub fn input_i64() -> i64 {
 }
 
 /*
- * Essa função implementa a entrada de valor inteiro positivo
- * de 32 bits. Se o valor digitado for não-numérico por exemplo,
- * o retorno é sempre 0.
+ * This function implements input of an 32-bits non-signed
+ * integer. Case the value is non-numeric the return is 0.
  */
 pub fn input_u32() -> u32 {
     // entrada
@@ -151,9 +134,8 @@ pub fn input_u32() -> u32 {
 }
 
 /*
- * Essa função implementa a entrada de valor inteiro positivo
- * de 64 its. Se o valor digitado for não-numérico por exemplo,
- * o retorno é sempre 0.
+ * This function implements input of an 64-bits non-signed
+ * integer. Case the value is non-numeric the return is 0.
  */
 pub fn input_u64() -> u64 {
     // entrada
@@ -170,9 +152,9 @@ pub fn input_u64() -> u64 {
 }
 
 /*
- * Essa função implementa a entrada de valor real de 32
- * bits. Se o valor digitado for não-numérico por exemplo,
- * o retorno é sempre 0.0.
+ * This function implements input of an 32-bits non-signed
+ * floating-point number. Case the value is non-numeric the 
+ * return is 0.
  */
 pub fn input_f32() -> f32 {
     // entrada
@@ -189,9 +171,9 @@ pub fn input_f32() -> f32 {
 }
 
 /*
- * Essa função implementa a entrada de valor real de 64
- * bits. Se o valor digitado for não-numérico por exemplo,
- * o retorno é sempre 0.0.
+ * This function implements input of an 64-bits non-signed
+ * floating-point number. Case the value is non-numeric the 
+ * return is 0.
  */
 pub fn input_f64() -> f64 {
     // entrada
@@ -205,16 +187,4 @@ pub fn input_f64() -> f64 {
         Err(_) => 0.0,      // valor com qq tipo de erro
     };
     value
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_repeat() {
-        assert_eq!(repeat('-', 0), "");
-        assert_eq!(repeat('-', 3), "---");
-    }
-
 }
