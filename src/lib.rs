@@ -1,4 +1,5 @@
 use std::io;
+use std::io::Error;
 use std::io::prelude::*;
 
 //////////////////////// UTILITIES ////////////////////////
@@ -95,9 +96,10 @@ pub fn input_i32() -> i32 {
 
     // conversão
     let value: i32 = match str.trim().parse::<i32>() {
-        Ok(value) => value, // valor correto
-        Err(_) => 0,        // valor com qq tipo de erro
+        Ok(value) => value,    // valor correto
+        Err(_) => 0,                // valor com qq tipo de erro
     };
+
     value
 }
 
@@ -116,6 +118,7 @@ pub fn input_i64() -> i64 {
         Ok(value) => value, // valor correto
         Err(_) => 0,        // valor com qq tipo de erro
     };
+
     value
 }
 
@@ -134,6 +137,7 @@ pub fn input_u32() -> u32 {
         Ok(value) => value, // valor correto
         Err(_) => 0,        // valor com qq tipo de erro
     };
+
     value
 }
 
@@ -152,6 +156,7 @@ pub fn input_u64() -> u64 {
         Ok(value) => value, // valor correto
         Err(_) => 0,        // valor com qq tipo de erro
     };
+
     value
 }
 
@@ -171,6 +176,7 @@ pub fn input_f32() -> f32 {
         Ok(value) => value, // valor correto
         Err(_) => 0.0,      // valor com qq tipo de erro
     };
+
     value
 }
 
@@ -190,5 +196,6 @@ pub fn input_f64() -> f64 {
         Ok(value) => value, // valor correto
         Err(_) => 0.0,      // valor com qq tipo de erro
     };
+    
     value
 }
