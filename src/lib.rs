@@ -1,5 +1,4 @@
 use std::io;
-use std::io::Error;
 use std::io::prelude::*;
 
 //////////////////////// UTILITIES ////////////////////////
